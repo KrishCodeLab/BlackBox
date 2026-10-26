@@ -3,43 +3,35 @@ import ollama
 
 
 def investigate_incident(logs):
-    prompt = f"""
-You are BLACKBOX, an AI incident investigation assistant.
+    print("BLACKBOX: Sending logs to Gemma...", flush=True)
 
-Analyze the following system logs.
+    response = ollama.chat(
+        model="gemma3:1b",
+        messages=[
+            {
+                "role": "user",
+                "content": f"""
+Analyze these system logs.
 
-Your tasks:
-1. Summarize what happened.
-2. Identify the most likely root cause.
-3. Quote the log entries that support your hypothesis.
+1. Summarize the incident.
+2. Identify the possible root cause.
+3. Quote the evidence.
 4. Suggest three diagnostic steps.
-5. State what cannot be determined from the available evidence.
+5. Mention what is uncertain.
 
-Important rules:
-- Do not invent log entries.
-- Separate facts from hypotheses.
-- If the evidence is insufficient, say so.
-- Do not claim that a hypothesis is confirmed without sufficient evidence.
+Do not invent evidence.
 
-SYSTEM LOGS:
+LOGS:
 {logs}
 """
+            }
+        ]
+    )
 
-    try:
-        response = ollama.chat(
-            model="gemma3:1b",
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
+    print("BLACKBOX: Analysis received!", flush=True)
 
-        return response["message"]["content"]
+    return response["message"]["content"]
 
-    except Exception as error:
-        return f"Investigation failed: {error}"
 
 
 if __name__ == "__main__":
@@ -51,10 +43,6 @@ if __name__ == "__main__":
     10:00:08 ERROR Retry limit exceeded
     """
 
-    print("\n========== BLACKBOX ==========\n")
-
     result = investigate_incident(sample_logs)
-
     print(result)
-    
-    print("\n==============================\n")
+s
