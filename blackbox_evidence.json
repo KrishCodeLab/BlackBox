@@ -1,0 +1,84 @@
+[
+  {
+    "id": "log1",
+    "timestamp": "10:00:01",
+    "level": "INFO",
+    "service": "api",
+    "message": "API server started"
+  },
+  {
+    "id": "log2",
+    "timestamp": "10:00:03",
+    "level": "WARN",
+    "service": "database",
+    "message": "Database latency elevated"
+  },
+  {
+    "id": "log3",
+    "timestamp": "10:00:05",
+    "level": "ERROR",
+    "service": "database",
+    "message": "Database connection timeout"
+  },
+  {
+    "id": "log4",
+    "timestamp": "10:00:06",
+    "level": "ERROR",
+    "service": "payments",
+    "message": "Payment request failed"
+  },
+  {
+    "timestamp": "10:00:08",
+    "level": "ERROR",
+    "message": "Retry limit exceeded",
+    "id": "log5"
+  },
+  {
+    "timestamp": "10:15:06",
+    "level": "ERROR",
+    "message": "Payment request failed",
+    "id": "log6"
+  },
+  {
+    "timestamp": "10:15:07",
+    "level": "WARN",
+    "message": "Retrying database connection",
+    "id": "log7"
+  },
+  {
+    "timestamp": "10:15:08",
+    "level": "ERROR",
+    "message": "Retry limit exceeded",
+    "id": "log8"
+  },
+  {
+    "timestamp": "10:15:09",
+    "level": "ERROR",
+    "message": "Order creation failed",
+    "id": "log9"
+  },
+  {
+    "timestamp": "10:15:10",
+    "level": "INFO",
+    "message": "Health check completed",
+    "id": "log10"
+  },
+  {
+    "timestamp": "10:15:11",
+    "level": "WARN",
+    "message": "Response queue growing",
+    "id": "log11"
+  },
+  {
+    "timestamp": "10:15:12",
+    "level": "ERROR",
+    "message": "Request returned status 500",
+    "id": "log12"
+  },
+  {
+    "timestamp": "10:15:13",
+    "level": "INFO",
+    "message": "Monitoring task finished",
+    "id": "log13"
+  }
+]
