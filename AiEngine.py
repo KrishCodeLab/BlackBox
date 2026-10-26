@@ -1,6 +1,7 @@
 
 import ollama
 
+from log_processor import parse_logs
 
 def investigate_incident(logs):
     print("BLACKBOX: Sending logs to Gemma...", flush=True)
@@ -34,13 +35,17 @@ LOGS:
 
 
 
+
 if __name__ == "__main__":
-    sample_logs = """
-    10:00:01 INFO API server started
-    10:00:03 WARN Database response time elevated
-    10:00:05 ERROR Database connection timeout
-    10:00:06 ERROR Payment request failed
-    10:00:08 ERROR Retry limit exceeded
-    """
-    result = investigate_incident(sample_logs)
+    with open("sample_logs.txt", "r") as file:
+        raw_logs = file.read()
+
+    parsed_logs = parse_logs(raw_logs)
+
+    print("Logs processed successfully!")
+    print(parsed_logs)
+
+    result = investigate_incident(raw_logs)
+
+    print("\n========== INVESTIGATION ==========\n")
     print(result)
