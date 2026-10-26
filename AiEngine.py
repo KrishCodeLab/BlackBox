@@ -1,10 +1,28 @@
 
 from log_processor import parse_logs, summarize_logs
+from evidence_store import index_logs, retrieve_evidence
 import ollama
 
 
+
 def investigate_incident(logs):
-    print("BLACKBOX: Sending logs to Gemma...", flush=True)
+    parsed_logs = parse_logs(logs)
+
+    # Give every log a unique ID
+    for i, log in enumerate(parsed_logs):
+        log["id"] = f"log{i + 1}"
+
+    # Store the logs
+    index_logs(parsed_logs)
+
+    # Search for relevant evidence
+    evidence = retrieve_evidence("database connection payment error", limit=5)
+
+    print("\nBLACKBOX: Retrieved evidence:")
+    for item in evidence:
+        print(item)
+
+    print("\nBLACKBOX: Sending logs and evidence to Gemma...", flush=True)
 
     response = ollama.chat(
         model="gemma3:1b",
@@ -12,18 +30,25 @@ def investigate_incident(logs):
             {
                 "role": "user",
                 "content": f"""
-Analyze these system logs.
+Investigate this incident using the logs and retrieved evidence.
 
 1. Summarize the incident.
-2. Identify the possible root cause.
-3. Quote the evidence.
+2. Suggest a possible root cause.
+3. Explain the evidence.
 4. Suggest three diagnostic steps.
-5. Mention what is uncertain.
+5. State what is uncertain.
 
-Do not invent evidence.
+Rules:
+- Do not invent log entries or timestamps.
+- Separate facts from possible explanations.
+- Do not claim an event happened multiple times unless the logs prove it.
+- If evidence is insufficient, say so.
 
-LOGS:
+ALL LOGS:
 {logs}
+
+RETRIEVED EVIDENCE:
+{evidence}
 """
             }
         ]
@@ -32,6 +57,9 @@ LOGS:
     print("BLACKBOX: Analysis received!", flush=True)
 
     return response["message"]["content"]
+
+
+    
 
 
 
