@@ -16,11 +16,16 @@ Analyze these system logs.
 
 1. Summarize the incident.
 2. Identify the possible root cause.
-3. Quote the evidence.
+3. Quote exact evidence from the logs.
 4. Suggest three diagnostic steps.
-5. Mention what is uncertain.
+5. Explain what is uncertain.
 
-Do not invent evidence.
+IMPORTANT RULES:
+- Use only facts present in the logs.
+- Never change timestamps or log messages.
+- Never invent events or quotes.
+- Separate confirmed facts from possible explanations.
+- If evidence is missing, say so.
 
 LOGS:
 {logs}
