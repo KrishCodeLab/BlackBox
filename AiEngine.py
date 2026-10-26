@@ -1,4 +1,5 @@
 
+from log_processor import parse_logs, summarize_logs
 import ollama
 
 
@@ -34,13 +35,17 @@ LOGS:
 
 
 
+
 if __name__ == "__main__":
-    sample_logs = """
-    10:00:01 INFO API server started
-    10:00:03 WARN Database response time elevated
-    10:00:05 ERROR Database connection timeout
-    10:00:06 ERROR Payment request failed
-    10:00:08 ERROR Retry limit exceeded
-    """
-    result = investigate_incident(sample_logs)
+    with open("sample_logs.txt", "r") as file:
+        raw_logs = file.read()
+
+    parsed_logs = parse_logs(raw_logs)
+    summary = summarize_logs(parsed_logs)
+
+    print("\n========== LOG SUMMARY ==========")
+    print(summary)
+
+    print("\n========== BLACKBOX INVESTIGATION ==========")
+    result = investigate_incident(raw_logs)
     print(result)
