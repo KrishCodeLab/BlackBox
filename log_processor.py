@@ -1,4 +1,5 @@
 
+
 def parse_logs(log_text):
     logs = []
 
@@ -19,7 +20,7 @@ def parse_logs(log_text):
             continue
 
         timestamp = parts[0]
-        level = parts[1]
+        level = parts[1].upper()
         message = parts[2]
 
         logs.append({
@@ -31,6 +32,30 @@ def parse_logs(log_text):
     return logs
 
 
+def summarize_logs(logs):
+    summary = {
+        "total": len(logs),
+        "errors": 0,
+        "warnings": 0,
+        "info": 0,
+        "unknown": 0
+    }
+
+    for log in logs:
+        level = log["level"]
+
+        if level == "ERROR":
+            summary["errors"] += 1
+        elif level in ["WARN", "WARNING"]:
+            summary["warnings"] += 1
+        elif level == "INFO":
+            summary["info"] += 1
+        else:
+            summary["unknown"] += 1
+
+    return summary
+
+
 if __name__ == "__main__":
     sample_logs = """
 10:00:01 INFO API server started
@@ -38,9 +63,16 @@ if __name__ == "__main__":
 10:00:05 ERROR Database connection timeout
 10:00:06 ERROR Payment request failed
 10:00:08 ERROR Retry limit exceeded
+This is a malformed line
+
 """
 
-    result = parse_logs(sample_logs)
+    parsed_logs = parse_logs(sample_logs)
+    summary = summarize_logs(parsed_logs)
 
-    for log in result:
+    print("PROCESSED LOGS:")
+    for log in parsed_logs:
         print(log)
+
+    print("\nLOG SUMMARY:")
+    print(summary)
