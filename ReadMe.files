@@ -1,0 +1,58 @@
+# BLACKBOX 🔎
+**AI-Powered System Log Investigation**
+
+BLACKBOX is a Python-based tool that analyzes system logs, identifies potential root causes, retrieves relevant evidence, and suggests diagnostic steps using a locally running AI model.
+
+## Features
+- **Log Processing:** Parses logs and summarizes severity levels.
+- **AI Investigation:** Uses Gemma 3:1b to analyze incidents and suggest possible causes.
+- **Evidence Retrieval:** Stores and retrieves relevant log entries using JSON.
+- **Diagnostic Suggestions:** Recommends steps to investigate system issues.
+- **Local AI:** Runs through Ollama without relying on a hosted AI API.
+
+## Tech Stack
+- Python
+- Ollama + Gemma 3:1b
+- Streamlit
+- JSON
+
+## How It Works
+1. System logs are provided as input.
+2. Logs are parsed and categorized by severity.
+3. Relevant evidence is stored and retrieved from JSON.
+4. Gemma generates an incident analysis.
+5. Results are displayed through the Streamlit interface.
+
+## Setup
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/KrishCodeLab/BlackBox.git
+cd BlackBox
+```
+
+**2. Install Ollama**  
+Download it from [ollama.com](https://ollama.com/).
+
+**3. Download the model**
+```bash
+ollama pull gemma3:1b
+```
+
+**4. Install Python dependencies**
+```bash
+python -m pip install ollama streamlit
+```
+
+**5. Run the AI engine test**
+```bash
+python AiEngine.py
+```
+
+Run the Streamlit app using its entry-point filename once the frontend is integrated.
+
+## Team
+Built collaboratively as an AI project.
+
+## Disclaimer
+BLACKBOX provides potential causes and diagnostic suggestions based on available logs. Its findings should be verified before use in real systems.
