@@ -642,7 +642,7 @@ if not st.session_state.logged_in:
         if submitted:
             # DEMO LOGIN ONLY.
             # Replace with proper authentication before deployment.
-            if username == "Krishna" and password == "krishna@123" or username == "dnyanda" and password == "dnyanda@123" or username == "sania" and password == "sania@123" or username == "siddhant" and password == "siddhant@123":
+            if username == "Krishna" and password == "krishna@123" or username == "dnyanda" and password == "dnyanda@123" or username == "sania" and password == "sania@123" or username == "siddhant" and password == "siddhant@123" or username == "demo" and password == "blackbox123":
                 st.session_state.logged_in = True
                 st.session_state.username = username
                 st.session_state.navigation = "Dashboard"
