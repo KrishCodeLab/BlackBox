@@ -42,7 +42,5 @@ if __name__ == "__main__":
     10:00:06 ERROR Payment request failed
     10:00:08 ERROR Retry limit exceeded
     """
-
     result = investigate_incident(sample_logs)
     print(result)
-s
